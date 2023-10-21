@@ -75,25 +75,3 @@ downloadButton.addEventListener("click", () => {
   }
 });
 
-const codeSampleButton = document.getElementById("code-sample-button");
-
-codeSampleButton.addEventListener("click", () => {
-  const selection = document.getElementById("lang");
-  const syntax = document.getElementById("syntax").value;
-  const lang = selection.value;
-
-  const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  };
-
-  fetch(`https://api.codex.jaagrav.in/code-samples/${lang}/${syntax}`, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      const codebox = document.getElementById("code");
-      codebox.value = data.code;
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error);
-    });
-});
