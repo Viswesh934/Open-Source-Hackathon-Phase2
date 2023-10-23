@@ -9,14 +9,18 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-
-        #container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .wrapper {
+        display: flex; 
+        justify-content: center;
+        max-width: 1200px; 
+        margin: 0 auto;
+    }
+        #container, #meow {
+        max-width: 45%; 
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         #code, #output{
@@ -29,13 +33,15 @@
             height: 100px;
             font-family: monospace;
         }
-        #lang {
+        #lang, #website {
             width: 100%;
             margin: 10px 0;
             padding: 5px;
             border: 1px solid #ccc;
         }
-
+        #meow{
+            overflow-y: auto;
+        }
         #run-button, #review-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -53,6 +59,7 @@
     </style>
 </head>
 <body>
+    <div class="wrapper">
     <div id="container">
         <h1>Code challenger</h1>
         <label for="lang">Select the shit you want</label>
@@ -75,18 +82,29 @@
         <button id="run-button" type="submit">Run Code</button>
         <button id="review-button" type="submit">Download</button>
         <button id="code-sample-button" type="button">Get code sample</button>
-    </div>
-    <div id="container">
         <div id="myDiv">
             <textarea id="input" placeholder="input"></textarea>
         </div>
         <textarea id="output" placeholder="output"></textarea>
         <p id="output-status"></p>
+        <div id="cant">
+            <textarea id="output-2" placeholder="Code review"></textarea>
+        </div>
     </div>
-    <div id="cant">
-        <textarea id="output-2" placeholder="Code review"></textarea>
+    <div id="meow">
+        <label for="website">Select the shit you want</label>
+        <select id="website" name="lang">
+            <option value="codeforces">Codeforces</option>
+            <option value="code_chef">CodeChef</option>
+            <option value="top_coder">TopCoder</option>
+            <option value="at_coder">AtCoder</option>
+            <option value="hacker_rank">HackerRank</option>
+            <option value="hacker_earth">HackerEarth</option>
+            <option value="leet_code">LeetCode</option>
+        </select>
+        <div id="condis"></div>
     </div>
-    <script src="index.js">
-    </script>
+    </div>
+    <script src="index.js"></script>
     </body>
 </html>

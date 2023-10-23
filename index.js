@@ -75,3 +75,98 @@ downloadButton.addEventListener("click", () => {
   }
 });
 
+const webselect = document.getElementById("website");
+webselect.addEventListener("change", () => {
+  const val = webselect.value;
+  disweb(val);
+});
+function formatedDate(oldDate) {
+  let Dates = new Date(oldDate);
+  let offset = Dates.getTimezoneOffset();
+  let utc = new Date(Dates.getTime() - offset);
+  let Year = ('' + utc.getFullYear()).substring(2, 4);
+  let Month = utc.getMonth();
+  let date = utc.getDate();
+  let day = utc.getDay();
+  let hour = utc.getHours();
+  let minutes = utc.getMinutes();
+  let seconds = utc.getSeconds();
+  if (hour < 10) hour = '0' + hour;
+  if (minutes < 10) minutes = '0' + minutes;
+  if (seconds < 10) seconds = '0' + seconds;
+  if (date < 10) date = '0' + date;
+  if (Month < 10) Month = '0' + Month;
+  if (Year < 10) Year = '0' + Year;
+  return date + "." + Month + "." + Year + " "  + hour + ":" + minutes + " IST";
+}
+function disweb(val) {
+  fetch(`https://kontests.net/api/v1/${val}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let str = `
+         <style>
+         .card {
+          text-align: center;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 300px;
+      }
+      
+      img {
+          width: 100%;
+          max-height: 150px;
+          object-fit: cover;
+          border-radius: 10px;
+      }
+      
+      h2 {
+          margin: 10px 0;
+          font-size: 1.5em;
+      }
+      
+      p {
+          margin: 5px 0;
+          font-size: 1.1em;
+      }
+      
+      .custom-button {
+          padding: 10px 20px;
+          font-size: 1em;
+          background-color: #0074D9;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+      }
+      
+      .custom-button:hover {
+          background-color: #0056b3;
+      }
+         </style>
+      `;
+      for (key in data) {
+        const name = data[key].name;
+        var currentDate = new Date();
+        const curr = currentDate.getDate();
+        console.log(curr);
+        const start = formatedDate(data[key].start_time);
+        const end = formatedDate(data[key].end_time);
+        const url = data[key].url;
+        const img = `image/${val}.png`;
+        str += `
+        <div class="card">
+         <img src=${img} alt="Image">
+         <h2>${name}</h2>
+         <p><b>Start:</b>${start}</p>
+         <p><b>End-:</b>${end}</p>
+         <a href="${url}" target="_blank"><button class="custom-button">Go to contest</button></a>
+        </div>
+        `;
+      }
+      const carbody = document.getElementById('condis');
+      carbody.innerHTML = str;
+    });
+}
