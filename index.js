@@ -170,3 +170,57 @@ function disweb(val) {
       carbody.innerHTML = str;
     });
 }
+//code review
+const codeSampleButton = document.getElementById("code-sample-button");
+const code = document.getElementById("code");
+
+// Store the previous language selection.
+let previousLang = "";
+
+// Define a function to generate a code sample for the given language.
+function generateCodeSample(lang) {
+  let codeSample = "";
+
+  switch (lang) {
+    case "py":
+      codeSample = `print("Hello, world!")`;
+      break;
+    case "js":
+      codeSample = `console.log("Hello, world!");`;
+      break;
+    case "c":
+      codeSample = `#include <stdio.h>\n\nint main() {\n  printf("Hello, world!\n");\n  return 0;\n}`;
+      break;
+    case "java":
+      codeSample = `public class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, world!");\n  }\n}`;
+      break;
+    case "cpp":
+      codeSample = `#include <iostream>\n\nint main() {\n  std::cout << "Hello, world!" << std::endl;\n  return 0;\n}`;
+      break;
+    case "go":
+      codeSample = `package main\n\nimport "fmt"\n\nfunc main() {\n  fmt.Println("Hello, world!")\n}`;
+      break;
+    case "cs":
+      codeSample = `using System;\n\nclass HelloWorld\n{\n  static void Main(string[] args)\n  {\n    Console.WriteLine("Hello, world!");\n  }\n}`;
+      break;
+    default:
+      codeSample = "Code sample not available for the selected language.";
+  }
+
+  return codeSample;
+}
+
+
+// Update the code sample when the language selection changes.
+langSelect.addEventListener("change", () => {
+  const lang = langSelect.value;
+  const codeSample = generateCodeSample(lang);
+  code.innerText = codeSample;
+});
+
+// Update the code sample when the code sample button is clicked.
+codeSampleButton.addEventListener("click", () => {
+  const lang = langSelect.value;
+  const codeSample = generateCodeSample(lang);
+  codebox.value = codeSample; // Update the content of the textarea
+});
