@@ -224,3 +224,25 @@ codeSampleButton.addEventListener("click", () => {
   const codeSample = generateCodeSample(lang);
   codebox.value = codeSample; // Update the content of the textarea
 });
+
+//Hacker News
+// Make a GET request to the Tech News API
+// Upload code
+// Get the file upload and text area elements
+const fileUploadElement = document.getElementById('file-upload');
+
+
+// Add an event listener to the file upload element
+fileUploadElement.addEventListener('change', async (event) => {
+  // Get the uploaded file
+  const file = event.target.files[0];
+
+  // Read the file as text
+  const text = await file.text();
+
+  // Add the text to the text area element
+  codebox.value="";
+  codebox.value = text;
+});
+
+// 
